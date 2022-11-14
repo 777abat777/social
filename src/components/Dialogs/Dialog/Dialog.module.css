@@ -1,0 +1,26 @@
+.dialog {
+   border: 2px solid gray;
+   padding: 4px;
+   display: flex;
+   column-gap: 100px;
+   border-radius: 5px;
+   cursor: pointer;
+   transition: 0.3s;
+   align-items: center;
+}
+
+.dialog:hover {
+   background-color: lightgray;
+   transform: scale(1.02);
+}
+
+.dialog img {
+   width: 40px;
+   border-radius: 0px 10px 10px 0;
+}
+
+.dialog a {
+   text-decoration: none;
+   font-size: 20px;
+   color: black
+}

@@ -1,0 +1,14 @@
+.profile {
+   display: inline-block;
+   background-image: linear-gradient(45deg, orange, green);
+   opacity: 0.8;
+   padding: 30px;
+}
+
+.profile__img {
+   display: block;
+   margin: 0 auto;
+
+   width: 500px;
+
+}

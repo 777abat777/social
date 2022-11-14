@@ -1,0 +1,20 @@
+.message {
+   padding: 20px 30px;
+   border: solid gray 2px;
+   width: 50%;
+   border-radius: 20px;
+   transition: 0.4s;
+}
+
+.message:hover {
+   background-color: lightgray;
+   cursor: pointer;
+}
+
+.message:nth-child(even) {
+   margin-left: 100px;
+}
+
+.message:nth-child(even):hover {
+   background-color: gray;
+}
