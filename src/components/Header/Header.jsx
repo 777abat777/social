@@ -1,5 +1,4 @@
 import style from './Header.module.css'
-console.log(style)
 
 const Header = () => {
    return (

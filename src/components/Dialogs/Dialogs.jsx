@@ -9,6 +9,7 @@ import React from 'react'
 let messageRef = React.createRef()
 
 const Dialogs = (props) => {
+   console.log(props)
    let dialogsData = props.dialogsPage.dialogsData
    let messageData = props.dialogsPage.messageData
 
