@@ -1,6 +1,7 @@
 import style from './MyPosts.module.css'
 import Post from './Post/Post'
 import React from 'react'
+import { addPostActionCreator, changePostTextActionCreator } from './../../../redux/profileReducer'
 
 
 
@@ -14,13 +15,15 @@ const MyPosts = (props) => {
 
    let textarearef = React.createRef()
 
+
+
    let addpost = () => {
-      props.addPostData()
+      props.dispatch(addPostActionCreator())
 
    }
    let changePostText = () => {
       let value = textarearef.current.value
-      props.changeNewPostText(value)
+      props.dispatch(changePostTextActionCreator(value))
    }
    return (
       <div className="my__posts">
