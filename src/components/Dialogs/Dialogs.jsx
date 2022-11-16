@@ -3,9 +3,6 @@ import Dialog from './Dialog/Dialog'
 import Message from './Message/Message'
 import React from 'react'
 
-import { addMessageActionCreator, ChangeMessageTextActionCreator } from './../../redux/dialogsReducer'
-
-
 // let messageRef = React.createRef()
 
 const Dialogs = (props) => {
@@ -13,13 +10,13 @@ const Dialogs = (props) => {
    const messages = props.dialogsPage.messageData.map((message) => { return <Message message={message.message} id={message.id} /> })
 
    const addMessage = () => {
-      props.dispatch(addMessageActionCreator())
+      props.addMessage()
    }
 
    let ChangeMessageText = (e) => {
       let text = e.target.value
       // let text = messageRef.current.value
-      props.dispatch(ChangeMessageTextActionCreator(text))
+      props.ChangeMessageText(text)
    }
 
 
