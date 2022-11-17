@@ -7,7 +7,7 @@ const Profile = (props) => {
       <section className={style.profile}>
          <ProfileInfo />
          {/* <MyPosts newPostText={props.profilePage.newPostText} postData={props.profilePage.postData} dispatch={props.dispatch} /> */}
-         <MyPostsContainer store={props.store} />
+         <MyPostsContainer />
       </section>
    )
 }
