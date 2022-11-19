@@ -1,0 +1,64 @@
+.users {}
+
+.users_title {
+   color: gray;
+   margin-bottom: 50px;
+}
+
+.user {
+   margin: 30px auto;
+   width: 90%;
+   display: flex;
+   column-gap: 10px;
+}
+
+.user_left {
+   display: flex;
+   flex-direction: column;
+   row-gap: 40px;
+   justify-content: space-between;
+   align-items: center;
+   width: 10%;
+}
+
+.user_left img {
+   width: 60px;
+   height: 60px;
+}
+
+.user_left button {
+   padding: 10px 20px;
+   font-weight: bold;
+}
+
+.user_right {
+   width: 70%;
+   border: 2px solid gray;
+   display: flex;
+   justify-content: space-between;
+   padding: 10px 5px;
+   border-radius: 15px;
+}
+
+.user_right_info {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
+}
+
+.user_name {}
+
+.user_status {}
+
+.user_right_place {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
+   width: 10%;
+   font-size: 20px;
+   padding: 0 10px;
+}
+
+.user_country {}
+
+.user_city {}
