@@ -6,8 +6,8 @@ import React from 'react'
 // let messageRef = React.createRef()
 
 const Dialogs = (props) => {
-   const dialogs = props.dialogsPage.dialogsData.map((dialog) => { return (<Dialog name={dialog.name} id={dialog.id} />) })
-   const messages = props.dialogsPage.messageData.map((message) => { return <Message message={message.message} id={message.id} /> })
+   const dialogs = props.dialogsPage.dialogsData.map((dialog) => { return (<Dialog name={dialog.name} id={dialog.id} key={dialog.id} />) })
+   const messages = props.dialogsPage.messageData.map((message) => { return <Message message={message.message} id={message.id} key={message.id} /> })
 
    const addMessage = () => {
       props.addMessage()
