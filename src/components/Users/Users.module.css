@@ -62,3 +62,19 @@
 .user_country {}
 
 .user_city {}
+
+.users_pages {
+   margin: 30px auto;
+   width: 90%;
+}
+
+.page {
+   font-size: 17px;
+   cursor: pointer;
+}
+
+.current_page {
+   font-size: 17px;
+   cursor: pointer;
+   color: blue;
+}
