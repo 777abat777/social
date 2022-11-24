@@ -3,13 +3,16 @@ const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET-USERS'
 const SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT'
 const CHANGE_PAGE = "CHANGE_PAGE"
+const RESET_PAGE = "RESET_PAGE"
+const LOADING_USERS = "LOADING_USERS"
 let initialState = {
    users: [
 
    ],
-   pageSize: 5,
+   pageSize: 100, //5
    currentPage: 1,
-   totalUserCount: 4000
+   totalUserCount: 4000,
+   isLoadingUsers: true,
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -58,6 +61,20 @@ const usersReducer = (state = initialState, action) => {
 
          }
       }
+      case RESET_PAGE: {
+         return {
+            ...state,
+            currentPage: 1
+
+         }
+      }
+      case LOADING_USERS: {
+         return {
+            ...state,
+            isLoadingUsers: action.isLoadingUsers
+
+         }
+      }
 
 
       default:
@@ -66,34 +83,45 @@ const usersReducer = (state = initialState, action) => {
 }
 
 
-export const followAC = (userid) => {
+export const follow = (userid) => {
    return {
       type: FOLLOW,
       userid: userid
    }
 }
-export const unfollowAC = (userid) => {
+export const unfollow = (userid) => {
    return {
       type: UNFOLLOW,
       userid: userid
    }
 }
-export const setUsersAC = (users) => {
+export const setUsers = (users) => {
    return {
       type: SET_USERS,
       users: users
    }
 }
-export const setUsersTotalCountAC = (userscount) => {
+export const setUsersTotalCount = (userscount) => {
    return {
       type: SET_USERS_TOTAL_COUNT,
       userscount: userscount
    }
 }
-export const changePageAC = (currentPage) => {
+export const changePage = (currentPage) => {
    return {
       type: CHANGE_PAGE,
       currentPage: currentPage
+   }
+}
+export const resetPage = () => {
+   return {
+      type: RESET_PAGE,
+   }
+}
+export const loadingUsers = (isLoadingUsers) => {
+   return {
+      type: LOADING_USERS,
+      isLoadingUsers: isLoadingUsers
    }
 }
 

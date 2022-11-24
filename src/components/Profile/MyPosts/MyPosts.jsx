@@ -9,7 +9,6 @@ import React from 'react'
 
 
 const MyPosts = (props) => {
-   console.log(props)
    const posts = props.postData.map((post) => { return <Post message={post.message} likes={post.likes} id={post.id} key={post.key} /> })
 
    let textarearef = React.createRef()

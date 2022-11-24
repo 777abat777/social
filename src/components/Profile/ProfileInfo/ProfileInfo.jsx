@@ -1,10 +1,14 @@
 import style from './ProfileInfo.module.css'
 
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
    return (
       <div className='profile__info'>
-         <img src="https://img4.goodfon.com/wallpaper/nbig/5/83/1977-datsun-280z-wheels.jpg" alt="" className={style.profile__img} />
-         <div>ava+desc</div>
+         <img src={props.userData.photos.large} alt="" className={style.profile__img} />
+         <div>
+            <h2>{props.userData.fullName}</h2>
+            <img src={props.userData.photos.small} alt="" />
+            <h2>{props.userData.aboutMe}</h2>
+         </div>
       </div>
    )
 }
