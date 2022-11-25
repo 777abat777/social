@@ -1,18 +1,22 @@
 * {
    padding: 0;
    margin: 0;
+   box-sizing: border-box;
 }
 
 body {
-   background-color: #e1ede1;
+   background-color: #404049;
 }
 
-.wrapper {
-   padding: 20px;
-   width: 1200px;
-   margin: 0 auto;
-   display: grid;
-   grid-template-columns: 1fr 6fr;
-   gap: 10px 20px;
+.wrapper {}
 
+.container {
+   width: 1300px;
+   margin: 0 auto;
+}
+
+.content {
+   display: grid;
+   grid-template-columns: 15% 85%;
+   gap: 10px 20px;
 }

@@ -1,17 +1,49 @@
 .nav {
-   background-color: green;
+   background-color: rgb(24 26 30 / 51%);
    display: flex;
    align-items: flex-start;
-   justify-content: center;
+   border-radius: 20px;
+   width: 100%;
+   height: 70vh;
 }
 
 .nav ul {
-
+   width: 100%;
    list-style-type: none;
    display: flex;
    flex-direction: column;
-   align-items: center;
+   align-items: flex-start;
    justify-content: center;
-   gap: 20px;
    padding: 20px 0;
+   font-size: 20px;
+}
+
+.nav li {
+   padding: 10px 0;
+   flex-grow: 1;
+   width: 100%;
+   padding-left: 10px;
+   cursor: pointer;
+   transition: 0.7s;
+   display: flex;
+}
+
+
+
+.nav li:hover {
+   background: #404049;
+}
+
+.nav li:hover a {
+   color: #ce1745;
+   text-shadow: 0 0 10px #ce1745;
+}
+
+.nav a {
+   display: inline-block;
+   width: 100%;
+   color: white;
+   text-decoration: none;
+   transition: 0.5s;
+   padding-left: 10px;
 }
