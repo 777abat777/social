@@ -5,13 +5,14 @@ const SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT'
 const CHANGE_PAGE = "CHANGE_PAGE"
 const RESET_PAGE = "RESET_PAGE"
 const LOADING_USERS = "LOADING_USERS"
+
 let initialState = {
    users: [
 
    ],
-   pageSize: 100, //5
+   pageSize: 7,
    currentPage: 1,
-   totalUserCount: 4000,
+   totalUserCount: 50,
    isLoadingUsers: true,
 }
 
@@ -41,6 +42,7 @@ const usersReducer = (state = initialState, action) => {
          }
       }
       case SET_USERS: {
+
          return {
             ...state,
             users: [...action.users,]  // users: [...state.users, ...action.users,]
@@ -75,6 +77,7 @@ const usersReducer = (state = initialState, action) => {
 
          }
       }
+
 
 
       default:

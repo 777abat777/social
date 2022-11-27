@@ -1,14 +1,17 @@
-.profile {
-   display: inline-block;
-   background-image: linear-gradient(45deg, orange, green);
-   opacity: 0.8;
-   padding: 30px;
+.profile__cover {
+   border-radius: 25px 25px 0 0;
+   background: url('./../../../assets/image/profile_bg.jpg');
+   display: flex;
+   justify-content: flex-end;
+   padding: 30px 30px 0 0;
 }
+
 
 .profile__img {
    display: block;
-   margin: 0 auto;
-
-   width: 500px;
-
+   width: 200px;
+   height: 200px;
+   border-radius: 50%;
+   transform: translate(0, 30%);
+   border: 3px solid white;
 }

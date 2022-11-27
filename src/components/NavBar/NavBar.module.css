@@ -28,6 +28,15 @@
    display: flex;
 }
 
+.nav svg {
+   color: white;
+   transition: 0.7s;
+}
+
+.nav li:hover svg {
+   color: #ce1745;
+   text-shadow: 0 0 10px #ce1745;
+}
 
 
 .nav li:hover {

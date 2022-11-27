@@ -2,6 +2,7 @@
    background-color: rgb(24 26 30 / 51%);
    border-radius: 0px 0px 50px 50px;
    margin-bottom: 20px;
+   padding: 20px;
 }
 
 .header__content {
@@ -12,16 +13,42 @@
 }
 
 .header__logo {
-   padding: 20px;
-
+   margin: 0px 0px 0px 50px;
+   font-size: 2.5rem;
 }
 
-.logo {
-   width: 40px;
-
+.header__logo svg {
+   transition: 0.7s;
+   color: #fff;
+   cursor: pointer;
 }
 
-.header_login {}
+.header__logo svg:hover {
+   color: #ce1745;
+   text-shadow: 0 0 10px #ce1745;
+   animation: shake 2s 1;
+}
+
+
+@keyframes shake {
+   0% {
+      transform: rotate(0deg);
+   }
+
+   50% {
+      transform: rotate(360deg);
+   }
+
+   100% {
+      transform: rotate(0deg);
+   }
+}
+
+.header_login {
+   color: #fff;
+   font-size: 18px;
+}
+
 
 .header_login a {
    color: wheat;

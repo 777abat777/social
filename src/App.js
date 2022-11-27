@@ -16,14 +16,15 @@ const App = (props) => {
             <div className='container'>
                <div className="content">
                   <NavBar />
-                  <Routes>
-                     <Route path='/profile/:userId' element={<ProfileContainer />} />
-                     <Route path='/profile/' element={<ProfileContainer />} />
-                     {/* <Route path='/dialogs*' element={<Dialogs dialogsPage={props.state.dialogsPage} dispatch={props.dispatch} />} /> */}
-                     <Route path='/dialogs*' element={<DialogsContainer />} />
-                     <Route path='/users' element={<UsersContainer />} />
-                     <Route path='/photo' element={<Photo />} />
-                  </Routes>
+                  <div className="main">
+                     <Routes>
+                        <Route path='/profile/:userId' element={<ProfileContainer />} />
+                        <Route path='/profile/' element={<ProfileContainer />} />
+                        <Route path='/dialogs*' element={<DialogsContainer />} />
+                        <Route path='/users' element={<UsersContainer />} />
+                        <Route path='/photo' element={<Photo />} />
+                     </Routes>
+                  </div>
                </div>
             </div>
          </div>

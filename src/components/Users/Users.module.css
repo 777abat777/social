@@ -1,49 +1,80 @@
 .users {}
 
 .users_title {
-   color: gray;
-   margin-bottom: 50px;
+   color: white;
+   user-select: none;
 }
 
 .user {
    margin: 30px auto;
    width: 90%;
    display: flex;
-   column-gap: 10px;
+   column-gap: 40px;
+
 }
 
 .user_left {
+   font-size: 18px;
    display: flex;
    flex-direction: column;
-   row-gap: 40px;
-   justify-content: space-between;
+   row-gap: 10px;
+   justify-content: space-around;
    align-items: center;
    width: 10%;
+   /* border: solid white 1px; */
+   padding: 5px;
+   /* border-radius: 15px; */
 }
 
 .user_left img {
-   width: 60px;
-   height: 60px;
+   width: 4rem;
+   height: 4rem;
+   border: 1px solid white;
+   border-radius: 30%;
+   /* padding: 10px; */
 }
 
 .user_left button {
-   padding: 10px 20px;
+   padding: 10px 15px;
    font-weight: bold;
+   background-color: white;
+   border: none;
+   border-radius: 10px;
+   cursor: pointer;
+   color: #181a1e;
+   font-size: 18px;
+   transition: 0.7s;
+}
+
+.user_left button:hover {
+   color: #ce1745;
+   text-shadow: 0 0 2px #ce1745;
+   background: #404049;
+}
+
+.user_left svg {
+   color: white;
+   font-size: 3rem;
+   border: 1px solid white;
+   border-radius: 30%;
+   padding: 10px;
 }
 
 .user_right {
    width: 70%;
-   border: 2px solid gray;
+   border: 1px solid white;
    display: flex;
    justify-content: space-between;
-   padding: 10px 5px;
+   padding: 20px 10px;
    border-radius: 15px;
+   color: white;
 }
 
 .user_right_info {
    display: flex;
    flex-direction: column;
-   justify-content: space-around;
+   justify-content: space-between;
+
 }
 
 .user_name {}
@@ -54,9 +85,7 @@
    display: flex;
    flex-direction: column;
    justify-content: space-around;
-   width: 10%;
    font-size: 20px;
-   padding: 0 10px;
 }
 
 .user_country {}
@@ -64,17 +93,36 @@
 .user_city {}
 
 .users_pages {
-   margin: 30px auto;
-   width: 90%;
+   margin: 10px auto;
+   width: 25%;
+   border-radius: 20px;
+   overflow: hidden;
+
+}
+
+.pagination {
+   padding: 10px 0;
+   display: flex;
+   justify-content: center;
+   background-color: white;
+}
+
+
+.page:hover {
+   color: lightslategray;
 }
 
 .page {
    font-size: 17px;
    cursor: pointer;
+   color: white;
+   font-weight: 700;
+   transition: 0.7s;
 }
 
 .current_page {
    font-size: 17px;
    cursor: pointer;
-   color: blue;
+   color: #ce1745;
+   font-weight: 900;
 }
