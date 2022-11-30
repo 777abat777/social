@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
 import Users from "./Users";
-import { setUsers, follow, unfollow, setUsersTotalCount, changePage, resetPage, loadingUsers } from './../../redux/users-Reducer'
-import axios from 'axios'
+import { setUsers, follow, unfollow, setUsersTotalCount, changePage, resetPage, loadingUsers, followingUsers } from './../../redux/users-Reducer'
 import React from 'react'
 import Preloader from "../common/Preloader/Preloader";
+import { usersApi } from "../../api/api";
 
 
 
@@ -21,17 +21,17 @@ class UsersContainerApi extends React.Component {
    changeCurrentPage = (page) => {
       this.props.changePage(page)
       this.props.loadingUsers(true)
-      axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${page}`).then((response) => {
-         this.props.setUsers(response.data.items)
+      usersApi.getUssers(this.props.pageSize, page).then((data) => {
+         this.props.setUsers(data.items)
          this.props.loadingUsers(false)
       })
    }
    getUssers = () => {
       this.props.loadingUsers(true)
-      axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`).then((response) => {
-         this.props.setUsers(response.data.items)
+      usersApi.getUssers(this.props.pageSize, this.props.currentPage).then((data) => {
+         this.props.setUsers(data.items)
          // console.log(response.data)
-         this.props.setUsersTotalCount(response.data.totalCount)
+         this.props.setUsersTotalCount(data.totalCount)
          this.props.loadingUsers(false)
       })
    }
@@ -48,6 +48,10 @@ class UsersContainerApi extends React.Component {
                changeCurrentPage={this.changeCurrentPage}
                unfollow={this.props.unfollow}
                follow={this.props.follow}
+               followRequest={usersApi.followRequest}
+               unfollowRequest={usersApi.unfollowRequest}
+               followingUsers={this.props.followingUsers}
+               followingProgress={this.props.followingProgress}
             />
          </div>
       )
@@ -66,7 +70,7 @@ let mapStateToProps = (state) => {
       currentPage: state.usersPage.currentPage,
       pageSize: state.usersPage.pageSize,
       isLoadingUsers: state.usersPage.isLoadingUsers,
-
+      followingProgress: state.usersPage.followingProgress
    }
 }
 
@@ -79,6 +83,7 @@ const UsersContainer = connect(mapStateToProps,
       changePage,
       resetPage,
       loadingUsers,
+      followingUsers,
    }
 )(UsersContainerApi)
 

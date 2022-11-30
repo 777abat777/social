@@ -5,6 +5,7 @@ const SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT'
 const CHANGE_PAGE = "CHANGE_PAGE"
 const RESET_PAGE = "RESET_PAGE"
 const LOADING_USERS = "LOADING_USERS"
+const FOLLOWING_USERS = 'FOLLOWING_USERS'
 
 let initialState = {
    users: [
@@ -14,6 +15,7 @@ let initialState = {
    currentPage: 1,
    totalUserCount: 50,
    isLoadingUsers: true,
+   followingProgress: []
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -77,6 +79,15 @@ const usersReducer = (state = initialState, action) => {
 
          }
       }
+      case FOLLOWING_USERS: {
+         return {
+            ...state,
+            followingProgress: action.isFetching
+               ? [...state.followingProgress, action.userId]
+               : state.followingProgress.filter((id) => id !== action.userId)
+
+         }
+      }
 
 
 
@@ -125,6 +136,13 @@ export const loadingUsers = (isLoadingUsers) => {
    return {
       type: LOADING_USERS,
       isLoadingUsers: isLoadingUsers
+   }
+}
+export const followingUsers = (userId, isFetching) => {
+   return {
+      type: FOLLOWING_USERS,
+      userId,
+      isFetching
    }
 }
 

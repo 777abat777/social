@@ -43,13 +43,19 @@
    cursor: pointer;
    color: #181a1e;
    font-size: 18px;
-   transition: 0.7s;
+   transition: 0.3s;
 }
+
+.user_left button:disabled {
+   background-color: black;
+
+}
+
 
 .user_left button:hover {
    color: #ce1745;
    text-shadow: 0 0 2px #ce1745;
-   background: #404049;
+
 }
 
 .user_left svg {

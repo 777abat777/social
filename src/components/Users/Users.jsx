@@ -19,12 +19,6 @@ const Users = (props) => {
             <Pagination className={style.pagination} simple defaultCurrent={props.currentPage} total={props.totalUserCount} onChange={(page, pageSize) => {
                props.changeCurrentPage(page);
             }} />
-            {/* {pages.map((page) => {
-               return (
-                  <span className={page === props.currentPage ? style.current_page : style.page} key={page} onClick={(e) => { props.changeCurrentPage(page) }}> {page}</span>
-               )
-            })} */}
-
          </div>
          {
             props.users.map((user) => {
@@ -35,7 +29,28 @@ const Users = (props) => {
                            {user.photos.small != null ? <img src={user.photos.small} /> : <FontAwesomeIcon icon={faUser} />}
 
                         </NavLink>
-                        {user.followed === true ? <button onClick={() => { props.unfollow(user.id) }}>Unfollow</button> : <button onClick={() => { props.follow(user.id) }}>Follow</button>}
+                        {user.followed ?
+                           <button disabled={props.followingProgress.some((id) => id === user.id)} onClick={() => {
+                              props.followingUsers(user.id, true)
+                              props.unfollowRequest(user.id).then((response) => {
+                                 if (response.data.resultCode === 0) {
+                                    props.unfollow(user.id)
+
+                                 }
+                                 props.followingUsers(user.id, false)
+                              })
+
+                           }}>Unfollow</button> :
+                           <button disabled={props.followingProgress.some((id) => id === user.id)} onClick={() => {
+                              props.followingUsers(user.id, true)
+                              props.followRequest(user.id).then((response) => {
+                                 if (response.data.resultCode === 0) {
+                                    props.follow(user.id)
+
+                                 }
+                                 props.followingUsers(user.id, false)
+                              })
+                           }}>Follow</button>}
 
                      </div>
                      <div className={style.user_right}>
