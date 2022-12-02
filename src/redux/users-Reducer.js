@@ -1,3 +1,5 @@
+import { usersApi } from "../api/api"
+
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET-USERS'
@@ -143,6 +145,42 @@ export const followingUsers = (userId, isFetching) => {
       type: FOLLOWING_USERS,
       userId,
       isFetching
+   }
+}
+
+export const getUsersThunkCreator = (pageSize, currentPage) => {
+   return (dispatch) => {
+      dispatch(loadingUsers(true))
+      usersApi.getUssers(pageSize, currentPage).then((data) => {
+         dispatch(setUsers(data.items))
+         dispatch(setUsersTotalCount(data.totalCount))
+         dispatch(loadingUsers(false))
+      })
+   }
+}
+
+export const followthunk = (userId) => {
+   return (dispatch) => {
+      dispatch(followingUsers(userId, true))
+      usersApi.followRequest(userId).then((response) => {
+         if (response.data.resultCode === 0) {
+            dispatch(follow(userId))
+
+         }
+         dispatch(followingUsers(userId, false))
+      })
+   }
+}
+export const unfollowthunk = (userId) => {
+   return (dispatch) => {
+      dispatch(followingUsers(userId, true))
+      usersApi.unfollowRequest(userId).then((response) => {
+         if (response.data.resultCode === 0) {
+            dispatch(unfollow(userId))
+
+         }
+         dispatch(followingUsers(userId, false))
+      })
    }
 }
 

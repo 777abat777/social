@@ -1,9 +1,8 @@
 import { connect } from "react-redux";
 import Users from "./Users";
-import { setUsers, follow, unfollow, setUsersTotalCount, changePage, resetPage, loadingUsers, followingUsers } from './../../redux/users-Reducer'
+import { changePage, resetPage, getUsersThunkCreator, followthunk, unfollowthunk } from './../../redux/users-Reducer'
 import React from 'react'
 import Preloader from "../common/Preloader/Preloader";
-import { usersApi } from "../../api/api";
 
 
 
@@ -20,20 +19,10 @@ class UsersContainerApi extends React.Component {
    }
    changeCurrentPage = (page) => {
       this.props.changePage(page)
-      this.props.loadingUsers(true)
-      usersApi.getUssers(this.props.pageSize, page).then((data) => {
-         this.props.setUsers(data.items)
-         this.props.loadingUsers(false)
-      })
+      this.props.getUsersThunkCreator(this.props.pageSize, page)
    }
    getUssers = () => {
-      this.props.loadingUsers(true)
-      usersApi.getUssers(this.props.pageSize, this.props.currentPage).then((data) => {
-         this.props.setUsers(data.items)
-         // console.log(response.data)
-         this.props.setUsersTotalCount(data.totalCount)
-         this.props.loadingUsers(false)
-      })
+      this.props.getUsersThunkCreator(this.props.pageSize, this.props.currentPage)
    }
    render = () => {
       return (
@@ -46,12 +35,9 @@ class UsersContainerApi extends React.Component {
                pageSize={this.props.pageSize}
                currentPage={this.props.currentPage}
                changeCurrentPage={this.changeCurrentPage}
-               unfollow={this.props.unfollow}
-               follow={this.props.follow}
-               followRequest={usersApi.followRequest}
-               unfollowRequest={usersApi.unfollowRequest}
-               followingUsers={this.props.followingUsers}
                followingProgress={this.props.followingProgress}
+               followthunk={this.props.followthunk}
+               unfollowthunk={this.props.unfollowthunk}
             />
          </div>
       )
@@ -76,14 +62,11 @@ let mapStateToProps = (state) => {
 
 const UsersContainer = connect(mapStateToProps,
    {
-      follow,
-      unfollow,
-      setUsers,
-      setUsersTotalCount,
       changePage,
       resetPage,
-      loadingUsers,
-      followingUsers,
+      getUsersThunkCreator,
+      followthunk,
+      unfollowthunk
    }
 )(UsersContainerApi)
 

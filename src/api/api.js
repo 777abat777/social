@@ -35,3 +35,13 @@ export const headerApi = {
       )
    }
 }
+export const profileApi = {
+   getProfileUsserdata(userId) {
+      return (instanse.get(`profile/${userId}`)).then(
+         (response) => {
+            return response.data
+         }
+      )
+   }
+}
+

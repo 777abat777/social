@@ -1,3 +1,5 @@
+import { profileApi } from "../api/api"
+
 const ADD_POST_DATA = 'ADD-POST-DATA'
 const CHANGE_NEW_POST_TEXT = 'CHANGE-NEW-POST-TEXT'
 const SET_USER_PROFILE_DATA = 'SET_USER_PROFILE_DATA'
@@ -53,6 +55,14 @@ export const changePostTextActionCreator = (text) => {
 export const setUserProfileData = (data) => {
    return {
       type: SET_USER_PROFILE_DATA, data
+   }
+}
+
+export const getProfileUsserdataThunk = (userId) => {
+   return (dispatch) => {
+      profileApi.getProfileUsserdata(userId).then((data) => {
+         dispatch(setUserProfileData(data))
+      })
    }
 }
 

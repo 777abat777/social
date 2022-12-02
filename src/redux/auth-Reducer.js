@@ -1,3 +1,5 @@
+import { headerApi } from "../api/api"
+
 const SET_USER_DATA = 'SET_USER_DATA'
 
 
@@ -30,6 +32,17 @@ export const setUserData = (id, login, email) => {
    return {
       type: SET_USER_DATA,
       data: { id, login, email }
+   }
+}
+
+export const getUserDataThunk = () => {
+   return (dispatch) => {
+      headerApi.getUsserdata().then((data) => {
+         if (data.resultCode === 0) {
+            let { email, id, login } = data.data
+            dispatch(setUserData(id, login, email))
+         }
+      })
    }
 }
 

@@ -26,32 +26,11 @@ const Users = (props) => {
                   <div key={user.id} className={style.user}>
                      <div className={style.user_left}>
                         <NavLink to={`/profile/${user.id}`}>
-                           {user.photos.small != null ? <img src={user.photos.small} /> : <FontAwesomeIcon icon={faUser} />}
-
+                           {user.photos.small != null ? <img src={user.photos.small} alt='some avatar' /> : <FontAwesomeIcon icon={faUser} />}
                         </NavLink>
                         {user.followed ?
-                           <button disabled={props.followingProgress.some((id) => id === user.id)} onClick={() => {
-                              props.followingUsers(user.id, true)
-                              props.unfollowRequest(user.id).then((response) => {
-                                 if (response.data.resultCode === 0) {
-                                    props.unfollow(user.id)
-
-                                 }
-                                 props.followingUsers(user.id, false)
-                              })
-
-                           }}>Unfollow</button> :
-                           <button disabled={props.followingProgress.some((id) => id === user.id)} onClick={() => {
-                              props.followingUsers(user.id, true)
-                              props.followRequest(user.id).then((response) => {
-                                 if (response.data.resultCode === 0) {
-                                    props.follow(user.id)
-
-                                 }
-                                 props.followingUsers(user.id, false)
-                              })
-                           }}>Follow</button>}
-
+                           <button disabled={props.followingProgress.some((id) => id === user.id)} onClick={() => { props.unfollowthunk(user.id) }}>Unfollow</button> :
+                           <button disabled={props.followingProgress.some((id) => id === user.id)} onClick={() => { props.followthunk(user.id) }}>Follow</button>}
                      </div>
                      <div className={style.user_right}>
                         <div className={style.user_right_info}>

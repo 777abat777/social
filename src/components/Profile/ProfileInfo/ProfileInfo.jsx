@@ -1,8 +1,7 @@
 import style from './ProfileInfo.module.css'
-import profile_bg from './../../../assets/image/profile_bg.jpg'
+
 
 const ProfileInfo = (props) => {
-   console.log(props.userData)
    return (
       <div className='profile__info'>
          <div className={style.profile__cover}>
