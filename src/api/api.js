@@ -42,6 +42,17 @@ export const profileApi = {
             return response.data
          }
       )
+   },
+   getProfileUsserStatus(userId) {
+      return (instanse.get(`profile/status/${userId}`)).then(
+         (response) => {
+            return response.data
+         }
+      )
+   },
+   updateProfileUsserStatus(status) {
+      return (instanse.put(`profile/status`, { status: status }))
+
    }
 }
 

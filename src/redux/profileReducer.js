@@ -3,6 +3,7 @@ import { profileApi } from "../api/api"
 const ADD_POST_DATA = 'ADD-POST-DATA'
 const CHANGE_NEW_POST_TEXT = 'CHANGE-NEW-POST-TEXT'
 const SET_USER_PROFILE_DATA = 'SET_USER_PROFILE_DATA'
+const SET_USER_STATUS = 'SET_USER_STATUS'
 
 let initialState = {
    postData: [
@@ -11,7 +12,8 @@ let initialState = {
       { message: 'last text', likes: 20, id: 3, key: 3 },
    ],
    newPostText: '',
-   userData: null
+   userData: null,
+   userStatus: ''
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -36,6 +38,12 @@ const profileReducer = (state = initialState, action) => {
             userData: action.data
          }
       }
+      case SET_USER_STATUS: {
+         return {
+            ...state,
+            userStatus: action.status
+         }
+      }
       default:
          return state
    }
@@ -57,11 +65,44 @@ export const setUserProfileData = (data) => {
       type: SET_USER_PROFILE_DATA, data
    }
 }
+export const setUserStatus = (status) => {
+   return {
+      type: SET_USER_STATUS, status
+   }
+}
 
+
+// export const getProfileUsserdataThunk = (userId) => {
+//    return (dispatch) => {
+//       profileApi.getProfileUsserdata(userId).then((data) => {
+//          dispatch(setUserProfileData(data))
+//       })
+//    }
+// }
 export const getProfileUsserdataThunk = (userId) => {
    return (dispatch) => {
       profileApi.getProfileUsserdata(userId).then((data) => {
-         dispatch(setUserProfileData(data))
+         profileApi.getProfileUsserStatus(userId).then((status) => {
+            dispatch(setUserStatus(status))
+            dispatch(setUserProfileData(data))
+         })
+
+      })
+   }
+}
+// export const getProfileUsserStatusThunk = (userId) => {
+//    return (dispatch) => {
+//       profileApi.getProfileUsserStatus(userId).then((status) => {
+//          dispatch(setUserStatus(status))
+//       })
+//    }
+// }
+export const updateProfileUsserStatusThunk = (status) => {
+   return (dispatch) => {
+      profileApi.updateProfileUsserStatus(status).then((response) => {
+         if (response.data.resultCode === 0) {
+            dispatch(setUserStatus(status))
+         }
       })
    }
 }
