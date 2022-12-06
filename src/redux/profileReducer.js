@@ -49,13 +49,11 @@ export const addPost = (post) => {
 }
 
 export const setUserProfileData = (data) => {
-   debugger
    return {
       type: SET_USER_PROFILE_DATA, data
    }
 }
 export const setUserStatus = (status) => {
-   debugger
    return {
       type: SET_USER_STATUS,
       status

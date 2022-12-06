@@ -33,6 +33,7 @@ export const setUserData = (id, login, email, isAuth) => {
    }
 }
 
+
 export const getUserDataThunk = () => {
    return (dispatch) => {
       headerApi.getUsserdata().then((data) => {
@@ -43,7 +44,7 @@ export const getUserDataThunk = () => {
       })
    }
 }
-export const loginUserThunk = (email, password, rememberMe) => {
+export const loginUserThunk = (email, password, rememberMe, setError) => {
    return (dispatch) => {
       headerApi.login(email, password, rememberMe).then((data) => {
          if (data.resultCode === 0) {
@@ -54,7 +55,13 @@ export const loginUserThunk = (email, password, rememberMe) => {
                }
             })
          }
-      })
+         else {
+            setError('server', {
+               message: data.messages
+            })
+         }
+      }
+      )
    }
 }
 export const logoutUserThunk = () => {
