@@ -1,7 +1,7 @@
 import style from './MyPosts.module.css'
 import Post from './Post/Post'
 import React from 'react'
-
+import { useForm } from "react-hook-form";
 
 
 
@@ -9,25 +9,26 @@ import React from 'react'
 
 
 const MyPosts = (props) => {
-   const posts = props.postData.map((post) => { return <Post message={post.message} likes={post.likes} id={post.id} key={post.key} /> })
+   const posts = props.postData.map((post) => { return <Post message={post.message} likes={post.likes} id={post.id} key={post.message} /> })
 
-   let textarearef = React.createRef()
+   const { register,
+      handleSubmit,
+      reset
+   } = useForm();
 
-
-   let addpost = () => {
-      props.addpost()
-
+   const onSubmit = (data) => {
+      props.addPost(data.post)
+      reset()
    }
-   let changePostText = () => {
-      let value = textarearef.current.value
-      props.changePostText(value)
-   }
+
    return (
       <div className="my__posts">
          <div className='add__post'>
-            <textarea name="" id="" cols="30" rows="4" ref={textarearef} value={props.newPostText} onChange={changePostText}></textarea>
-            <br />
-            <button type="submit" className="button" onClick={addpost}>Отправить</button>
+            <form onSubmit={handleSubmit(onSubmit)}>
+               <p> <textarea cols="30" rows="4" {...register('post')}></textarea></p>
+               <button>Отправить</button>
+            </form>
+
          </div>
          <div className="posts">
             {posts}

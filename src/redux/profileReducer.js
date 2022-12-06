@@ -1,7 +1,6 @@
 import { profileApi } from "../api/api"
 
 const ADD_POST_DATA = 'ADD-POST-DATA'
-const CHANGE_NEW_POST_TEXT = 'CHANGE-NEW-POST-TEXT'
 const SET_USER_PROFILE_DATA = 'SET_USER_PROFILE_DATA'
 const SET_USER_STATUS = 'SET_USER_STATUS'
 
@@ -11,9 +10,8 @@ let initialState = {
       { message: 'second text', likes: 15, id: 2, key: 2 },
       { message: 'last text', likes: 20, id: 3, key: 3 },
    ],
-   newPostText: '',
    userData: null,
-   userStatus: ''
+   userStatus: null
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -22,16 +20,9 @@ const profileReducer = (state = initialState, action) => {
          {
             return {
                ...state,
-               newPostText: "",
-               postData: [...state.postData, { message: state.newPostText, likes: 12, id: 4, key: 4, }]
+               postData: [...state.postData, { message: action.post, likes: 12, id: 4, key: 4, }]
             }
          }
-      case CHANGE_NEW_POST_TEXT: {
-         return {
-            ...state,
-            newPostText: action.text
-         }
-      }
       case SET_USER_PROFILE_DATA: {
          return {
             ...state,
@@ -50,24 +41,24 @@ const profileReducer = (state = initialState, action) => {
 }
 
 
-export const addPostActionCreator = () => {
+export const addPost = (post) => {
    return {
-      type: ADD_POST_DATA
+      type: ADD_POST_DATA,
+      post
    }
 }
-export const changePostTextActionCreator = (text) => {
-   return {
-      type: CHANGE_NEW_POST_TEXT, text: text
-   }
-}
+
 export const setUserProfileData = (data) => {
+   debugger
    return {
       type: SET_USER_PROFILE_DATA, data
    }
 }
 export const setUserStatus = (status) => {
+   debugger
    return {
-      type: SET_USER_STATUS, status
+      type: SET_USER_STATUS,
+      status
    }
 }
 

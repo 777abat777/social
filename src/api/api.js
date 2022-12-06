@@ -33,7 +33,21 @@ export const headerApi = {
             return response.data
          }
       )
-   }
+   },
+   login(email, password, rememberMe) {
+      return (instanse.post(`auth/login`, { email, password, rememberMe: false })).then(
+         (response) => {
+            return response.data
+         }
+      )
+   },
+   logout() {
+      return (instanse.delete(`auth/login`)).then(
+         (response) => {
+            return response.data
+         }
+      )
+   },
 }
 export const profileApi = {
    getProfileUsserdata(userId) {
