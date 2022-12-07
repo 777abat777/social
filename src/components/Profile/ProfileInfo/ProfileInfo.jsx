@@ -7,7 +7,7 @@ const ProfileInfo = (props) => {
       <div className='profile__info'>
          <div className={style.profile__cover}>
             <div className={style.status_container}>
-               {/* <h2>{props.userData.aboutMe}</h2> */}
+               <h2>{props.userData.aboutMe}</h2>
                <ProfileStatus userStatus={props.userStatus} updateProfileUsserStatusThunk={props.updateProfileUsserStatusThunk} />
             </div>
             <div>
