@@ -3,7 +3,6 @@ import style from './Header.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCodeBranch } from '@fortawesome/free-solid-svg-icons'
 const Header = (props) => {
-   console.log(props)
    return (
       <header className={style.header}>
          <div className='container'>

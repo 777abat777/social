@@ -7,19 +7,21 @@ import style from './Login.module.css'
 
 // Добавить капчу
 // добавить валидацию с сервера +
-// Стилизовать
+// Стилизовать +
 
 const Login = (props) => {
    const { register,
       handleSubmit,
       formState: { errors },
       setError,
-      reset
+      reset,
+      clearErrors
    } = useForm({ mode: "onChange" });
 
    const onSubmit = (data) => {
       props.loginUserThunk(data.email, data.password, data.rememberMe, setError)
       reset()
+
 
    }
    if (props.isAuth) { return <Navigate to="/profile" /> }
@@ -33,7 +35,7 @@ const Login = (props) => {
                <label htmlFor="rememberMe">Запомнить меня:</label>
                <input type="checkbox" name="" id="rememberMe" {...register('rememberMe')} />
             </p>
-            <button>Войти</button>
+            <button onClick={() => clearErrors(["server", "password"])}>Войти</button>
             {errors.server && <div style={{ color: 'red' }}>{errors.server.message}</div>}
          </form>
       </div>

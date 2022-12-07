@@ -36,7 +36,7 @@ export const setUserData = (id, login, email, isAuth) => {
 
 export const getUserDataThunk = () => {
    return (dispatch) => {
-      headerApi.getUsserdata().then((data) => {
+      return headerApi.getUsserdata().then((data) => {
          if (data.resultCode === 0) {
             let { email, id, login, } = data.data
             dispatch(setUserData(id, login, email, true))

@@ -15,7 +15,8 @@ class ProfileContainer extends React.Component {
    componentDidMount() {
       let userId = this.props.router.params.userId
       if (!userId) {
-         userId = 26833
+         userId = this.props.authUserId
+
       }
       this.props.getProfileUsserdataThunk(userId)
       // this.props.getProfileUsserStatusThunk(userId)
@@ -26,6 +27,7 @@ class ProfileContainer extends React.Component {
    }
 
    render() {
+
       return (!(this.props.userData) ? <Preloader /> : <Profile userData={this.props.userData} userStatus={this.props.userStatus} updateProfileUsserStatusThunk={this.props.updateProfileUsserStatusThunk} />)
    }
 
@@ -34,7 +36,8 @@ class ProfileContainer extends React.Component {
 let mapStateToProps = (state) => {
    return {
       userData: state.profilePage.userData,
-      userStatus: state.profilePage.userStatus
+      userStatus: state.profilePage.userStatus,
+      authUserId: state.auth.id
    }
 }
 
@@ -45,7 +48,7 @@ export default compose(
       updateProfileUsserStatusThunk,
       setUserStatus
    }),
-   // withAuthRedirect,
+   withAuthRedirect,
    withRouter
 )(ProfileContainer)
 
