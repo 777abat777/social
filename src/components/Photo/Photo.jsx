@@ -10,6 +10,7 @@ const Photo = () => {
    }
    return (
       <div>
+         <img src="" alt="" />
          <h1>counter {counter}</h1>
          <button onClick={setCounterUp}>up</button>
          <button onClick={setCounterDown}>down</button>
