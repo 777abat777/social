@@ -1,41 +1,30 @@
-import React from 'react'
-class ProfileStatus extends React.Component {
-   constructor(props) {
-      super(props)
+import { useEffect } from "react"
+import { useState } from "react"
 
+const ProfileStatus = (props) => {
+   let [editMode, setEditMode] = useState(false)
+   let [status, setStatus] = useState(props.userStatus)
+   useEffect(() => {
+      setStatus(props.userStatus)
+   }, [props.userStatus])
+   const editModeOn = () => {
+      setEditMode(true)
    }
-   state = {
-      editMode: false,
-      status: this.props.userStatus,
+   const editModeof = () => {
+      setEditMode(false)
+      props.updateProfileUsserStatusThunk(status)
    }
+   const changeStatus = (e) => {
+      let currentStatus = e.currentTarget.value
+      setStatus(currentStatus)
+   }
+   return (
+      <div>
+         {editMode && <input onBlur={editModeof} autoFocus={true} value={status} onChange={changeStatus} />}
+         {!editMode && <h2 onClick={editModeOn}>{status || 'some status'} </h2>}
+      </div>
+   )
 
-   changeStatusText = (e) => {
-      let target = e.currentTarget
-      this.setState({
-         status: target.value
-      })
-   }
-   editModeTrue = () => {
-      this.setState({
-         editMode: true
-      })
-   }
-   editModeFalse = () => {
-      this.setState({
-         editMode: false
-      })
-      this.props.updateProfileUsserStatusThunk(this.state.status)
-   }
-
-   render() {
-      return (
-         <div>
-            {this.state.editMode ?
-               <input onChange={this.changeStatusText} type="text" value={this.state.status} autoFocus={true} onBlur={this.editModeFalse} /> :
-               <h2 onClick={this.editModeTrue}>{this.state.status || 'some status'}</h2>}
-         </div>
-      )
-   }
 }
 
 export default ProfileStatus
