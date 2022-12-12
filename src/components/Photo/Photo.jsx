@@ -1,27 +1,8 @@
 import { useState } from 'react'
 import style from './Photo.module.css'
 
-import axios from "axios"
 
 
-const instanseToApi = axios.create(
-   {
-      baseURL: 'http://127.0.0.1:8000/',
-      headers: {
-         "Content-Type": "application/json"
-      }
-   }
-)
-export const usersApi = {
-   followRequest() {
-      return (instanseToApi.get(`heroes/`)).then(
-         (response) => {
-            console.log(response)
-            return response
-         }
-      )
-   }
-}
 
 // axios.get('http://127.0.0.1:8000/heroes')
 //    .then((response) => { console.log(response) })
@@ -49,7 +30,7 @@ const Photo = () => {
          <button onClick={setCounterUp}>up</button>
          <button onClick={setCounterDown}>down</button>
 
-         <button onClick={usersApi.followRequest}>get</button>
+
       </div>
    )
 }

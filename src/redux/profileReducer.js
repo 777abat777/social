@@ -1,8 +1,8 @@
 import { profileApi } from "../api/api"
 
-const ADD_POST_DATA = 'ADD-POST-DATA'
-const SET_USER_PROFILE_DATA = 'SET_USER_PROFILE_DATA'
-const SET_USER_STATUS = 'SET_USER_STATUS'
+const ADD_POST_DATA = 'profileReducer/ADD-POST-DATA'
+const SET_USER_PROFILE_DATA = 'profileReducer/SET_USER_PROFILE_DATA'
+const SET_USER_STATUS = 'profileReducer/SET_USER_STATUS'
 
 let initialState = {
    postData: [

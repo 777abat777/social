@@ -1,13 +1,13 @@
 import { usersApi } from "../api/api"
 
-const FOLLOW = 'FOLLOW'
-const UNFOLLOW = 'UNFOLLOW'
-const SET_USERS = 'SET-USERS'
-const SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT'
-const CHANGE_PAGE = "CHANGE_PAGE"
-const RESET_PAGE = "RESET_PAGE"
-const LOADING_USERS = "LOADING_USERS"
-const FOLLOWING_USERS = 'FOLLOWING_USERS'
+const FOLLOW = 'usersReducer/FOLLOW'
+const UNFOLLOW = 'usersReducer/UNFOLLOW'
+const SET_USERS = 'usersReducer/SET-USERS'
+const SET_USERS_TOTAL_COUNT = 'usersReducer/SET_USERS_TOTAL_COUNT'
+const CHANGE_PAGE = "usersReducer/CHANGE_PAGE"
+const RESET_PAGE = "usersReducer/RESET_PAGE"
+const LOADING_USERS = "usersReducer/LOADING_USERS"
+const FOLLOWING_USERS = 'usersReducer/FOLLOWING_USERS'
 
 let initialState = {
    users: [

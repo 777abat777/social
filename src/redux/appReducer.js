@@ -1,7 +1,7 @@
 
 import { getUserDataThunk } from "./auth-Reducer"
 
-const INITIALIZE_APP = 'INITIALIZE_APP'
+const INITIALIZE_APP = 'appReducer/INITIALIZE_APP'
 
 
 let initialState = {

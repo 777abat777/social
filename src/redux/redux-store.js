@@ -6,6 +6,7 @@ import sidebarReducer from "./sidebarReducer";
 import usersReducer from "./users-Reducer";
 import thunkMiddleware from 'redux-thunk'
 import appReducer from "./appReducer";
+import testReducer from "./testReducer";
 
 
 let reducers = combineReducers({
@@ -14,7 +15,8 @@ let reducers = combineReducers({
    sidebar: sidebarReducer,
    usersPage: usersReducer,
    auth: authReducer,
-   app: appReducer
+   app: appReducer,
+   test: testReducer
 })
 
 let store = legacy_createStore(reducers, applyMiddleware(thunkMiddleware))
