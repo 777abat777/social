@@ -28,3 +28,7 @@ body {
    padding: 30px;
    border-radius: 20px;
 }
+
+.mask_image {
+   display: none !important;
+}

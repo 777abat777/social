@@ -67,6 +67,14 @@ export const profileApi = {
    updateProfileUsserStatus(status) {
       return (instanse.put(`profile/status`, { status: status }))
 
+   },
+   setPhotoProfile(photo) {
+      let photoFormData = new FormData()
+      photoFormData.append('image', photo)
+      return (instanse.put(`profile/photo`, photoFormData, {
+         headers: { "Content-Type": "multipart/form-data" },
+      }))
+
    }
 }
 

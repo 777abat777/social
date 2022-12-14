@@ -1,24 +1,14 @@
 import style from './ProfileInfo.module.css'
-import ProfileStatus from './ProfileStatus/ProfileStatus'
-
+import ProfileHeader from './ProfileHeader/ProfileHeader';
 
 const ProfileInfo = (props) => {
+
+   console.log(props.userData)
    return (
       <div className='profile__info'>
-         <div className={style.profile__cover}>
-            <div className={style.status_container}>
-               {/* <h2>{props.userData.aboutMe}</h2> */}
-               <ProfileStatus userStatus={props.userStatus} updateProfileUsserStatusThunk={props.updateProfileUsserStatusThunk} />
-            </div>
-            <div>
-               <h2>{props.userData.fullName}</h2>
-               <img src={props.userData.photos.large} alt="" className={style.profile__img} />
-            </div>
-         </div>
+         <ProfileHeader setPhoto={props.setPhoto} isAuthUser={props.isAuthUser} userData={props.userData} userStatus={props.userStatus} updateProfileUsserStatusThunk={props.updateProfileUsserStatusThunk} />
          <div>
-
             <img src={props.userData.photos.small} alt="" />
-
          </div>
       </div>
    )

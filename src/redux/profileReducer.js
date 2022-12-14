@@ -3,6 +3,7 @@ import { profileApi } from "../api/api"
 const ADD_POST_DATA = 'profileReducer/ADD-POST-DATA'
 const SET_USER_PROFILE_DATA = 'profileReducer/SET_USER_PROFILE_DATA'
 const SET_USER_STATUS = 'profileReducer/SET_USER_STATUS'
+const SET_USER_PHOTO = 'profileReducer/SET_USER_PHOTO'
 
 let initialState = {
    postData: [
@@ -35,6 +36,12 @@ const profileReducer = (state = initialState, action) => {
             userStatus: action.status
          }
       }
+      case SET_USER_PHOTO: {
+         return {
+            ...state,
+            userData: { ...state.userData, photos: action.photos }
+         }
+      }
       default:
          return state
    }
@@ -57,6 +64,12 @@ export const setUserStatus = (status) => {
    return {
       type: SET_USER_STATUS,
       status
+   }
+}
+export const setUserPhoto = (photos) => {
+   return {
+      type: SET_USER_PHOTO,
+      photos
    }
 }
 
@@ -91,6 +104,16 @@ export const updateProfileUsserStatusThunk = (status) => {
       profileApi.updateProfileUsserStatus(status).then((response) => {
          if (response.data.resultCode === 0) {
             dispatch(setUserStatus(status))
+         }
+      })
+   }
+}
+export const setPhoto = (photo) => {
+   debugger
+   return (dispatch) => {
+      profileApi.setPhotoProfile(photo).then((response) => {
+         if (response.data.resultCode === 0) {
+            dispatch(setUserPhoto(response.data.data.photos))
          }
       })
    }

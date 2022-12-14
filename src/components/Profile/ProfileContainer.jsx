@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Profile from './Profile'
-import { getProfileUsserdataThunk, getProfileUsserStatusThunk, updateProfileUsserStatusThunk, setUserStatus } from './../../redux/profileReducer'
+import { getProfileUsserdataThunk, getProfileUsserStatusThunk, updateProfileUsserStatusThunk, setUserStatus, setPhoto } from './../../redux/profileReducer'
 import Preloader from '../common/Preloader/Preloader'
 import { withRouter } from '../HOC/withRouter/withRouter'
 import { withAuthRedirect } from '../HOC/withAuthRedirect'
@@ -12,23 +12,28 @@ class ProfileContainer extends React.Component {
    constructor(props) {
       super(props)
    }
-   componentDidMount() {
+   refreshData() {
       let userId = this.props.router.params.userId
       if (!userId) {
          userId = this.props.authUserId
 
       }
       this.props.getProfileUsserdataThunk(userId)
-      // this.props.getProfileUsserStatusThunk(userId)
+   }
+   componentDidMount() {
+      this.refreshData()
 
    }
-   componentWillUnmount() {
-
+   componentDidUpdate(prevProps, prevState, snapshot) {
+      console.log(this.props.userData)
+      if (this.props.router.params.userId !== prevProps.router.params.userId) {
+         this.refreshData()
+      }
    }
 
    render() {
 
-      return (!(this.props.userData) ? <Preloader /> : <Profile userData={this.props.userData} userStatus={this.props.userStatus} updateProfileUsserStatusThunk={this.props.updateProfileUsserStatusThunk} />)
+      return (!(this.props.userData) ? <Preloader /> : <Profile setPhoto={this.props.setPhoto} isAuthUser={!this.props.router.params.userId} userData={this.props.userData} userStatus={this.props.userStatus} updateProfileUsserStatusThunk={this.props.updateProfileUsserStatusThunk} />)
    }
 
 }
@@ -37,7 +42,7 @@ let mapStateToProps = (state) => {
    return {
       userData: state.profilePage.userData,
       userStatus: state.profilePage.userStatus,
-      authUserId: state.auth.id
+      authUserId: state.auth.id,
    }
 }
 
@@ -46,7 +51,8 @@ export default compose(
       getProfileUsserdataThunk,
       // getProfileUsserStatusThunk,
       updateProfileUsserStatusThunk,
-      setUserStatus
+      setUserStatus,
+      setPhoto
    }),
    withAuthRedirect,
    withRouter
