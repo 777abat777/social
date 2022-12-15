@@ -1,0 +1,111 @@
+.profile_contacts {
+   width: 40%;
+   position: relative;
+   font-size: 18px;
+}
+
+.profile_data_description {
+   border: solid white 2px;
+   height: 300px;
+   padding: 10px;
+   border-radius: 10px;
+   background-color: #181a1e;
+   padding-left: 10px;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-end;
+   gap: 10px 0px;
+   color: white;
+   font-size: 18px;
+   position: relative;
+   z-index: 4;
+}
+
+.profile_contacts button {
+   position: relative;
+   z-index: 1;
+   margin: 10px 0px 0px 10px;
+   padding: 5px;
+   font-weight: bold;
+   background-color: white;
+   border: none;
+   border-radius: 10px;
+   cursor: pointer;
+   color: #181a1e;
+   font-size: 18px;
+   transition: 0.3s;
+   transition: 1s;
+   opacity: 0;
+   transform: translate(0px, -50px)
+}
+
+.profile_contacts:hover button {
+   opacity: 1;
+   transform: translate(0px, 0px)
+}
+
+.profile_contacts button:hover {
+   color: #ce1745;
+   text-shadow: 0 0 2px #ce1745;
+}
+
+.small_img {
+   position: absolute;
+   right: 10px;
+   top: 10px;
+   display: block;
+   width: 60px;
+   height: 60px;
+   border: solid 2px white;
+   border-radius: 50%;
+}
+
+.profile_data_form {
+   border: solid white 2px;
+   padding: 10px;
+   border-radius: 10px;
+   background-color: #181a1e;
+   padding-left: 10px;
+   display: flex;
+   flex-direction: column;
+   gap: 10px 0px;
+   color: white;
+   font-size: 18px;
+   position: relative;
+   z-index: 4;
+}
+
+.profile_data_form button {
+   width: fit-content;
+   opacity: 1;
+   transform: translate(0px, 0px)
+}
+
+.profile_data_form:hover button {
+   opacity: 1;
+   transform: translate(0px, 0px)
+}
+
+.profile_data_form button:hover {
+   color: #ce1745;
+   text-shadow: 0 0 2px #ce1745;
+}
+
+.profile_data_form label {
+   margin: 0px 20px 0px 0px;
+}
+
+.profile_data_description p {
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+   align-items: baseline;
+}
+
+.profile_data_form input,
+select {
+   width: 50%;
+   font-size: 18px;
+   background-color: white;
+   padding: 5px 0px 5px 5px;
+}

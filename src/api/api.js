@@ -75,6 +75,11 @@ export const profileApi = {
          headers: { "Content-Type": "multipart/form-data" },
       }))
 
-   }
+   },
+   UpdateProfileUserData(data) {
+      return (instanse.put(`profile`, data, {
+         headers: { "Content-Type": "application/json" },
+      }))
+   },
 }
 

@@ -8,7 +8,9 @@ const ProfileStatus = (props) => {
       setStatus(props.userStatus)
    }, [props.userStatus])
    const editModeOn = () => {
-      setEditMode(true)
+      if (props.isAuthUser) {
+         setEditMode(true)
+      }
    }
    const editModeof = () => {
       setEditMode(false)

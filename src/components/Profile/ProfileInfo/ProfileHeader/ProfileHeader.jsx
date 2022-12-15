@@ -15,7 +15,7 @@ const ProfileHeader = (props) => {
    return (
       <div className={style.profile__cover}>
          <div className={style.status_container}>
-            <ProfileStatus userStatus={props.userStatus} updateProfileUsserStatusThunk={props.updateProfileUsserStatusThunk} />
+            <ProfileStatus isAuthUser={props.isAuthUser} userStatus={props.userStatus} updateProfileUsserStatusThunk={props.updateProfileUsserStatusThunk} />
          </div>
          <div className={style.image_block}>
             <h2>{props.userData.fullName}</h2>

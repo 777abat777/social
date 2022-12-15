@@ -109,7 +109,6 @@ export const updateProfileUsserStatusThunk = (status) => {
    }
 }
 export const setPhoto = (photo) => {
-   debugger
    return (dispatch) => {
       profileApi.setPhotoProfile(photo).then((response) => {
          if (response.data.resultCode === 0) {
@@ -118,5 +117,20 @@ export const setPhoto = (photo) => {
       })
    }
 }
+
+
+
+export const UpdateProfileUserData = (data) => {
+   return async (dispatch) => {
+      const response = await profileApi.UpdateProfileUserData(data)
+      if (response.data.resultCode === 0) {
+         console.log(response)
+      }
+
+   }
+}
+
+
+
 
 export default profileReducer

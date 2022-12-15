@@ -22,7 +22,7 @@ const MyPosts = (props) => {
    }
 
    return (
-      <div className="my__posts">
+      <div className={style.my__posts}>
          <div className='add__post'>
             <form onSubmit={handleSubmit(onSubmit)}>
                <p> <textarea cols="30" rows="4" {...register('post')}></textarea></p>

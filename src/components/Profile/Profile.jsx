@@ -5,7 +5,7 @@ import MyPostsContainer from './MyPosts/MyPostsContainer'
 const Profile = (props) => {
    return (
       <section className={style.profile}>
-         <ProfileInfo setPhoto={props.setPhoto} isAuthUser={props.isAuthUser} userData={props.userData} userStatus={props.userStatus} updateProfileUsserStatusThunk={props.updateProfileUsserStatusThunk} />
+         <ProfileInfo getProfileUsserdataThunk={props.getProfileUsserdataThunk} UpdateProfileUserData={props.UpdateProfileUserData} setPhoto={props.setPhoto} isAuthUser={props.isAuthUser} userData={props.userData} userStatus={props.userStatus} updateProfileUsserStatusThunk={props.updateProfileUsserStatusThunk} />
          <MyPostsContainer />
       </section>
    )

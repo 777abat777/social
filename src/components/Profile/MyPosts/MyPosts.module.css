@@ -1,0 +1,6 @@
+.my__posts {
+   display: flex;
+   flex-direction: row-reverse;
+   justify-content: space-around;
+   align-items: center;
+}

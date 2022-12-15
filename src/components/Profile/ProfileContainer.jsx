@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Profile from './Profile'
-import { getProfileUsserdataThunk, getProfileUsserStatusThunk, updateProfileUsserStatusThunk, setUserStatus, setPhoto } from './../../redux/profileReducer'
+import { getProfileUsserdataThunk, getProfileUsserStatusThunk, updateProfileUsserStatusThunk, setUserStatus, setPhoto, UpdateProfileUserData } from './../../redux/profileReducer'
 import Preloader from '../common/Preloader/Preloader'
 import { withRouter } from '../HOC/withRouter/withRouter'
 import { withAuthRedirect } from '../HOC/withAuthRedirect'
@@ -25,7 +25,6 @@ class ProfileContainer extends React.Component {
 
    }
    componentDidUpdate(prevProps, prevState, snapshot) {
-      console.log(this.props.userData)
       if (this.props.router.params.userId !== prevProps.router.params.userId) {
          this.refreshData()
       }
@@ -33,7 +32,7 @@ class ProfileContainer extends React.Component {
 
    render() {
 
-      return (!(this.props.userData) ? <Preloader /> : <Profile setPhoto={this.props.setPhoto} isAuthUser={!this.props.router.params.userId} userData={this.props.userData} userStatus={this.props.userStatus} updateProfileUsserStatusThunk={this.props.updateProfileUsserStatusThunk} />)
+      return (!(this.props.userData) ? <Preloader /> : <Profile getProfileUsserdataThunk={this.props.getProfileUsserdataThunk} UpdateProfileUserData={this.props.UpdateProfileUserData} setPhoto={this.props.setPhoto} isAuthUser={!this.props.router.params.userId} userData={this.props.userData} userStatus={this.props.userStatus} updateProfileUsserStatusThunk={this.props.updateProfileUsserStatusThunk} />)
    }
 
 }
@@ -52,7 +51,8 @@ export default compose(
       // getProfileUsserStatusThunk,
       updateProfileUsserStatusThunk,
       setUserStatus,
-      setPhoto
+      setPhoto,
+      UpdateProfileUserData
    }),
    withAuthRedirect,
    withRouter
