@@ -34,8 +34,8 @@ export const headerApi = {
          }
       )
    },
-   login(email, password, rememberMe) {
-      return (instanse.post(`auth/login`, { email, password, rememberMe: false })).then(
+   login(email, password, rememberMe, captcha) {
+      return (instanse.post(`auth/login`, { email, password, rememberMe: false, captcha })).then(
          (response) => {
             return response.data
          }
@@ -43,6 +43,13 @@ export const headerApi = {
    },
    logout() {
       return (instanse.delete(`auth/login`)).then(
+         (response) => {
+            return response.data
+         }
+      )
+   },
+   getCaptcha() {
+      return (instanse.get(`/security/get-captcha-url`)).then(
          (response) => {
             return response.data
          }

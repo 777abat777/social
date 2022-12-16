@@ -23,6 +23,7 @@
 
 .profile_contacts button {
    position: relative;
+   float: right;
    z-index: 1;
    margin: 10px 0px 0px 10px;
    padding: 5px;
@@ -75,6 +76,14 @@
    z-index: 4;
 }
 
+.button_container {
+   display: flex;
+   justify-content: space-between;
+   padding: 0px 20px 0px 10px;
+   height: 100%;
+   align-items: flex-end;
+}
+
 .profile_data_form button {
    width: fit-content;
    opacity: 1;
@@ -96,6 +105,13 @@
 }
 
 .profile_data_description p {
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+   align-items: baseline;
+}
+
+.profile_data_form p {
    width: 100%;
    display: flex;
    justify-content: space-between;

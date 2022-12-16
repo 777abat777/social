@@ -1,6 +1,8 @@
 import { headerApi } from "../api/api"
 
 const SET_USER_DATA = 'auth-Reducer/SET_USER_DATA'
+const SET_CAPTCHA_VALUE = 'auth-Reducer/SET_CAPTCHA_VALUE'
+const SET_CAPTCHA_URL = 'auth-Reducer/SET_CAPTCHA_URL'
 
 
 let initialState = {
@@ -8,6 +10,8 @@ let initialState = {
    login: null,
    email: null,
    isAuth: false,
+   showCaptcha: false,
+   captchaUrl: null
 }
 
 const authReducer = (state = initialState, action) => {
@@ -19,6 +23,20 @@ const authReducer = (state = initialState, action) => {
                ...action.data,
             }
          }
+      case SET_CAPTCHA_VALUE:
+         {
+            return {
+               ...state,
+               showCaptcha: action.value
+            }
+         }
+      case SET_CAPTCHA_URL:
+         {
+            return {
+               ...state,
+               captchaUrl: action.url
+            }
+         }
 
       default:
          return state
@@ -26,6 +44,18 @@ const authReducer = (state = initialState, action) => {
 }
 
 
+export const setCaptchaValue = (value) => {
+   return {
+      type: SET_CAPTCHA_VALUE,
+      value
+   }
+}
+export const setCaptchaUrl = (url) => {
+   return {
+      type: SET_CAPTCHA_URL,
+      url
+   }
+}
 export const setUserData = (id, login, email, isAuth) => {
    return {
       type: SET_USER_DATA,
@@ -44,22 +74,31 @@ export const getUserDataThunk = () => {
       })
    }
 }
-export const loginUserThunk = (email, password, rememberMe, setError) => {
+export const loginUserThunk = (email, password, rememberMe, captcha, setError) => {
    return (dispatch) => {
-      headerApi.login(email, password, rememberMe).then((data) => {
+      headerApi.login(email, password, rememberMe, captcha).then((data) => {
          if (data.resultCode === 0) {
             headerApi.getUsserdata().then((data) => {
                if (data.resultCode === 0) {
                   let { email, id, login, } = data.data
                   dispatch(setUserData(id, login, email, true))
+                  dispatch(setCaptchaValue(false))
                }
             })
+         }
+         else if (data.resultCode === 10) {
+            dispatch(getCaptcha())
+            setError('server', {
+               message: data.messages
+            })
+
          }
          else {
             setError('server', {
                message: data.messages
             })
          }
+
       }
       )
    }
@@ -70,6 +109,14 @@ export const logoutUserThunk = () => {
          if (data.resultCode === 0) {
             dispatch(setUserData(null, null, null, false))
          }
+      })
+   }
+}
+export const getCaptcha = () => {
+   return (dispatch) => {
+      headerApi.getCaptcha().then((data) => {
+         dispatch(setCaptchaUrl(data.url))
+         dispatch(setCaptchaValue(true))
       })
    }
 }

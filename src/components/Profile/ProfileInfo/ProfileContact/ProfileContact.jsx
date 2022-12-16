@@ -24,11 +24,14 @@ const ProfileContact = (props) => {
          <div >{props.contactEdit ?
             <form onSubmit={handleSubmit(onSubmit)} className={style.profile_data_form}>
                {ContactsForm}
-               <button >Сохранить</button>
+               <div className={style.button_container}>
+                  <button >Сохранить</button>
+                  <button onClick={props.finishEditContact}>Отмена</button>
+               </div>
             </form>
             : <div className={style.profile_data_description}>{Cotnacts}</div>}
          </div>
-         {props.contactEdit ? null : <button onClick={props.editContact}>Редактировать</button>}
+         {props.contactEdit ? null : props.isAuthUser ? <button onClick={props.editContact}>Редактировать</button> : null}
       </div>
 
 

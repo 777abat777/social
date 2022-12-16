@@ -45,7 +45,7 @@ const ProfileData = (props) => {
                   <p>Работа: {userData.lookingForAJob ? 'В поиске работы' : 'Не ищу работу'}</p>
                   <p>Почему ищу: {userData.lookingForAJobDescription || 'просто так'}</p>
                </div>
-               <button onClick={props.editData}>Редактировать</button>
+               {props.isAuthUser ? <button onClick={props.editData}>Редактировать</button> : null}
             </div>
          }
       </div>
