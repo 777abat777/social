@@ -1,4 +1,4 @@
-import style from './MyPosts.module.css'
+import style from './MyPosts.module.scss'
 import Post from './Post/Post'
 import React from 'react'
 import { useForm } from "react-hook-form";
@@ -9,8 +9,6 @@ import { useForm } from "react-hook-form";
 
 
 const MyPosts = (props) => {
-   const posts = props.postData.map((post) => { return <Post message={post.message} likes={post.likes} id={post.id} key={post.message} /> })
-
    const { register,
       handleSubmit,
       reset
@@ -31,7 +29,7 @@ const MyPosts = (props) => {
 
          </div>
          <div className="posts">
-            {posts}
+            {props.postData.map(post => <Post message={post.message} likes={post.likes} id={post.id} key={post.message} />)}
          </div>
       </div>
    )

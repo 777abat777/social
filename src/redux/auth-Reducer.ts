@@ -14,7 +14,7 @@ let initialState = {
    captchaUrl: null
 }
 
-const authReducer = (state = initialState, action) => {
+const authReducer = (state = initialState, action: any) => {
    switch (action.type) {
       case SET_USER_DATA:
          {
@@ -44,19 +44,19 @@ const authReducer = (state = initialState, action) => {
 }
 
 
-export const setCaptchaValue = (value) => {
+export const setCaptchaValue = (value: any) => {
    return {
       type: SET_CAPTCHA_VALUE,
       value
    }
 }
-export const setCaptchaUrl = (url) => {
+export const setCaptchaUrl = (url: any) => {
    return {
       type: SET_CAPTCHA_URL,
       url
    }
 }
-export const setUserData = (id, login, email, isAuth) => {
+export const setUserData = (id: any, login: any, email: any, isAuth: any) => {
    return {
       type: SET_USER_DATA,
       data: { id, login, email, isAuth }
@@ -65,7 +65,7 @@ export const setUserData = (id, login, email, isAuth) => {
 
 
 export const getUserDataThunk = () => {
-   return (dispatch) => {
+   return (dispatch: any) => {
       return headerApi.getUsserdata().then((data) => {
          if (data.resultCode === 0) {
             let { email, id, login, } = data.data
@@ -74,8 +74,8 @@ export const getUserDataThunk = () => {
       })
    }
 }
-export const loginUserThunk = (email, password, rememberMe, captcha, setError) => {
-   return (dispatch) => {
+export const loginUserThunk = (email: any, password: any, rememberMe: any, captcha: any, setError: any) => {
+   return (dispatch: any) => {
       headerApi.login(email, password, rememberMe, captcha).then((data) => {
          if (data.resultCode === 0) {
             headerApi.getUsserdata().then((data) => {
@@ -104,7 +104,7 @@ export const loginUserThunk = (email, password, rememberMe, captcha, setError) =
    }
 }
 export const logoutUserThunk = () => {
-   return (dispatch) => {
+   return (dispatch: any) => {
       headerApi.logout().then((data) => {
          if (data.resultCode === 0) {
             dispatch(setUserData(null, null, null, false))
@@ -113,7 +113,7 @@ export const logoutUserThunk = () => {
    }
 }
 export const getCaptcha = () => {
-   return (dispatch) => {
+   return (dispatch: any) => {
       headerApi.getCaptcha().then((data) => {
          dispatch(setCaptchaUrl(data.url))
          dispatch(setCaptchaValue(true))
