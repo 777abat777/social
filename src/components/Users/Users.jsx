@@ -4,6 +4,7 @@ import { Pagination } from 'antd';
 import { NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { useAppSelector } from '../../hook/hook';
 
 const Users = (props) => {
    let pages = []
@@ -12,6 +13,7 @@ const Users = (props) => {
    for (let i = 1; i <= pagecount; i++) {
       pages.push(i)
    }
+
    return (
       <div className={style.users}>
          <h1 className={style.users_title}>Users</h1>
@@ -28,9 +30,9 @@ const Users = (props) => {
                         <NavLink to={`/profile/${user.id}`}>
                            {user.photos.small != null ? <img src={user.photos.small} alt='some avatar' /> : <FontAwesomeIcon icon={faUser} />}
                         </NavLink>
-                        {user.followed ?
+                        {/* {user.followed ?
                            <button disabled={props.followingProgress.some((id) => id === user.id)} onClick={() => { props.unfollowthunk(user.id) }}>Unfollow</button> :
-                           <button disabled={props.followingProgress.some((id) => id === user.id)} onClick={() => { props.followthunk(user.id) }}>Follow</button>}
+                           <button disabled={props.followingProgress.some((id) => id === user.id)} onClick={() => { props.followthunk(user.id) }}>Follow</button>} */}
                      </div>
                      <div className={style.user_right}>
                         <div className={style.user_right_info}>

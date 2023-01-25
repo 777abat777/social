@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios, { AxiosError } from "axios"
 
 const instanse = axios.create(
    {
@@ -11,17 +11,22 @@ const instanse = axios.create(
 )
 
 export const usersApi = {
-   getUssers(pageSize, currentPage) {
-      return (instanse.get(`users?count=${pageSize}&page=${currentPage}`)).then(
-         (response) => {
-            return response.data
-         }
-      )
+   getUssers(pageSize: number, currentPage: number) {
+      return (instanse.get(`users?count=${pageSize}&page=${currentPage}`))
+         .then(
+            (response) => {
+               return response
+            }
+         )
+         .catch((error) => {
+            return error
+         })
+
    },
-   followRequest(id) {
+   followRequest(id: number) {
       return (instanse.post(`follow/${id}`))
    },
-   unfollowRequest(id) {
+   unfollowRequest(id: number) {
       return (instanse.delete(`follow/${id}`))
    }
 }
@@ -34,7 +39,7 @@ export const headerApi = {
          }
       )
    },
-   login(email, password, rememberMe, captcha) {
+   login(email: any, password: any, rememberMe: any, captcha: any) {
       return (instanse.post(`auth/login`, { email, password, rememberMe: false, captcha })).then(
          (response) => {
             return response.data
@@ -57,25 +62,25 @@ export const headerApi = {
    },
 }
 export const profileApi = {
-   getProfileUsserdata(userId) {
+   getProfileUsserdata(userId: any) {
       return (instanse.get(`profile/${userId}`)).then(
          (response) => {
             return response.data
          }
       )
    },
-   getProfileUsserStatus(userId) {
+   getProfileUsserStatus(userId: any) {
       return (instanse.get(`profile/status/${userId}`)).then(
          (response) => {
             return response.data
          }
       )
    },
-   updateProfileUsserStatus(status) {
+   updateProfileUsserStatus(status: any) {
       return (instanse.put(`profile/status`, { status: status }))
 
    },
-   setPhotoProfile(photo) {
+   setPhotoProfile(photo: any) {
       let photoFormData = new FormData()
       photoFormData.append('image', photo)
       return (instanse.put(`profile/photo`, photoFormData, {
@@ -83,7 +88,7 @@ export const profileApi = {
       }))
 
    },
-   UpdateProfileUserData(data) {
+   UpdateProfileUserData(data: any) {
       return (instanse.put(`profile`, data, {
          headers: { "Content-Type": "application/json" },
       }))

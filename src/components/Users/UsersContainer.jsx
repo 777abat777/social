@@ -1,73 +1,46 @@
-import { connect } from "react-redux";
 import Users from "./Users";
-import { changePage, resetPage, getUsersThunkCreator, followthunk, unfollowthunk } from './../../redux/users-Reducer'
 import React from 'react'
 import Preloader from "../common/Preloader/Preloader";
+import { useAppDispatch, useAppSelector } from "../../hook/hook";
+import { changePage, fetchUsers } from "../../store/UsersSlice/UserSlice";
+import { useState, useEffect } from 'react';
 
 
+const UsersContainer = (props) => {
+   let dispatch = useAppDispatch()
+
+   useEffect(() => {
+      dispatch(fetchUsers({ pageSize: 10, currentPage: 3 }))
+   }, [dispatch])
+   let users = useAppSelector(state => state.users.users)
+   let totalUserCount = useAppSelector(state => state.users.totalUserCount)
+   let pageSize = useAppSelector(state => state.users.pageSize)
+   let currentPage = useAppSelector(state => state.users.currentPage)
+   let loading = useAppSelector((state) => state.users.loading)
+   let error = useAppSelector((state) => state.users.error)
 
 
-class UsersContainerApi extends React.Component {
-   constructor(props) {
-      super(props);
+   let changeCurrentPage = (page) => {
+      dispatch(changePage(page))
+      dispatch(fetchUsers({ pageSize, page }))
    }
-   componentDidMount() {
-      this.getUssers()
-   }
-   componentWillUnmount() {
-      this.props.resetPage()
-   }
-   changeCurrentPage = (page) => {
-      this.props.changePage(page)
-      this.props.getUsersThunkCreator(this.props.pageSize, page)
-   }
-   getUssers = () => {
-      this.props.getUsersThunkCreator(this.props.pageSize, this.props.currentPage)
-   }
-   render = () => {
-      return (
-         <div>
-            {this.props.isLoadingUsers ? <Preloader /> : null}
 
-            <Users
-               users={this.props.users}
-               totalUserCount={this.props.totalUserCount}
-               pageSize={this.props.pageSize}
-               currentPage={this.props.currentPage}
-               changeCurrentPage={this.changeCurrentPage}
-               followingProgress={this.props.followingProgress}
-               followthunk={this.props.followthunk}
-               unfollowthunk={this.props.unfollowthunk}
-            />
-         </div>
-      )
-   }
+   return (
+      <div>
+         {loading && <Preloader />}
+         {error && <h1>{error}</h1>}
+         <Users
+            users={users}
+            totalUserCount={totalUserCount}
+            pageSize={pageSize}
+            currentPage={currentPage}
+            changeCurrentPage={changeCurrentPage}
+         // followingProgress={this.props.followingProgress}
+         // followthunk={this.props.followthunk}
+         // unfollowthunk={this.props.unfollowthunk}
+         />
+      </div>
+   )
 }
-
-
-
-
-
-
-let mapStateToProps = (state) => {
-   return {
-      users: state.usersPage.users,
-      totalUserCount: state.usersPage.totalUserCount,
-      currentPage: state.usersPage.currentPage,
-      pageSize: state.usersPage.pageSize,
-      isLoadingUsers: state.usersPage.isLoadingUsers,
-      followingProgress: state.usersPage.followingProgress
-   }
-}
-
-const UsersContainer = connect(mapStateToProps,
-   {
-      changePage,
-      resetPage,
-      getUsersThunkCreator,
-      followthunk,
-      unfollowthunk
-   }
-)(UsersContainerApi)
 
 export default UsersContainer

@@ -3,13 +3,14 @@ import Dialog from './Dialog/Dialog'
 import Message from './Message/Message'
 import React from 'react'
 import { useForm } from "react-hook-form";
+import { useAppSelector, useAppDispatch } from '../../hook/hook';
+import { addNewMessage } from '../../store/DialogsSlice/DialogSlice';
 
 
 const Dialogs = (props) => {
-   const dialogs = props.dialogsPage.dialogsData.map((dialog) => { return (<Dialog name={dialog.name} id={dialog.id} key={dialog.id} />) })
-   const messages = props.dialogsPage.messageData.map((message) => { return <Message message={message.message} id={message.id} key={message.message} /> })
-
-
+   let dialogs = useAppSelector(state => state.dialogs.dialogsData)
+   let messages = useAppSelector(state => state.dialogs.messageData)
+   const dispatch = useAppDispatch()
    const { register,
       handleSubmit,
       formState: { errors },
@@ -18,25 +19,23 @@ const Dialogs = (props) => {
 
 
    const onSubmit = (data) => {
-      props.addMessage(data.message)
+      dispatch(addNewMessage(data.message))
       reset()
    }
-
 
    return (
       <div className={style.dialogs}>
          <div className={style.dialogs__items}>
-            {dialogs}
+            {dialogs.map(dialog => <Dialog name={dialog.name} id={dialog.id} key={dialog.id} />)}
          </div>
          <div className={style.messages}>
-            {messages}
+            {messages.map(message => <Message message={message.message} id={message.id} key={message.message} />)}
             <div className='add__message'>
                <form onSubmit={handleSubmit(onSubmit)}>
                   <p><textarea cols="80" rows="5" {...register('message')} /></p>
                   <button>Отправить</button>
+
                </form>
-               {/* <textarea name="" id="" cols="80" rows="5" value={props.dialogsPage.messageText} onChange={ChangeMessageText} ></textarea>
-               <button onClick={addMessage}>Отправить</button> */}
             </div>
          </div>
       </div>
