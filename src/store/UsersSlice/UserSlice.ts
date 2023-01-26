@@ -10,7 +10,9 @@ interface UsersStateInterface {
    totalUserCount: number,
    isLoadingUsers: boolean,
    loading: boolean,
-   error: string | null | undefined
+   error: string | null | undefined,
+   followingInProgress: boolean,
+   followingUsers: Array<number>
 }
 
 export type UserType = {
@@ -25,23 +27,34 @@ export type UserType = {
 // Define the initial state using that type
 const initialState: UsersStateInterface = {
    users: [],
-   pageSize: 7,
+   pageSize: 10,
    currentPage: 1,
    totalUserCount: 50,
    isLoadingUsers: true,
    loading: false,
-   error: null
+   error: null,
+   followingInProgress: false,
+   followingUsers: []
 }
 export type ResponseData = {
    error: null,
    items: Array<UserType>,
    totalCount: number
 }
+export type TypeFetchUsersArguments = {
+   pageSize: number,
+   page: number
+}
+export type TypeFollowToggleTunkArguments = {
+   id: number,
+   followCase: "follow" | "unfollow"
+}
 
-export const fetchUsers = createAsyncThunk<ResponseData, { pageSize: number, currentPage: number }, { rejectValue: string }>(
+export const fetchUsers = createAsyncThunk<ResponseData, TypeFetchUsersArguments, { rejectValue: string }>(
    'users/fetchUsers',
-   async ({ pageSize, currentPage }, { rejectWithValue, dispatch }) => {
-      const response = await usersApi.getUssers(pageSize, currentPage)
+   async (requestdata, { rejectWithValue }) => {
+      let { pageSize, page } = requestdata
+      const response = await usersApi.getUssers(pageSize, page)
       if (response.status !== 200) {
          return rejectWithValue(`Server error ${response.message}`)
       }
@@ -49,8 +62,34 @@ export const fetchUsers = createAsyncThunk<ResponseData, { pageSize: number, cur
       return data
    }
 )
-
-
+export const followToggleTunk = createAsyncThunk<any, TypeFollowToggleTunkArguments, { rejectValue: string }>(
+   'users/folloToggleTunk',
+   async (requestdata, { rejectWithValue, dispatch }) => {
+      let { id, followCase } = requestdata
+      dispatch(followingUsers(id))
+      if (followCase === "follow") {
+         const response = await usersApi.followRequest(id)
+         if (response.status !== 200) {
+            return rejectWithValue(`Server error ${response.message}`)
+         }
+         const data = await response.data
+         dispatch(follow(id))
+         dispatch(followingSucces(id))
+         return data
+      }
+      if (followCase === "unfollow") {
+         const response = await usersApi.unfollowRequest(id)
+         if (response.status !== 200) {
+            console.log(response)
+            return rejectWithValue(`Server error ${response.message}`)
+         }
+         const data = await response.data
+         dispatch(unFollow(id))
+         dispatch(followingSucces(id))
+         return data
+      }
+   }
+)
 
 export const UsersSlice = createSlice({
    name: 'users',
@@ -87,6 +126,12 @@ export const UsersSlice = createSlice({
       loadingUsers: (state, action: PayloadAction<boolean>) => {
          state.isLoadingUsers = action.payload
       },
+      followingUsers: (state, action: PayloadAction<number>) => {
+         state.followingUsers.push(action.payload)
+      },
+      followingSucces: (state, action: PayloadAction<number>) => {
+         state.followingUsers = state.followingUsers.filter((el) => el !== action.payload)
+      }
    },
    extraReducers(builder) {
       builder
@@ -103,9 +148,17 @@ export const UsersSlice = createSlice({
             state.error = action.payload
             state.loading = false
          })
+         .addCase(followToggleTunk.pending, (state) => {
+         })
+         .addCase(followToggleTunk.fulfilled, (state, action) => {
+
+         })
+         .addCase(followToggleTunk.rejected, (state, action) => {
+
+         })
    },
 }
 )
 
-export const { setUsers, setUsersTotalCount, changePage } = UsersSlice.actions
+export const { setUsers, setUsersTotalCount, changePage, resetPage, follow, unFollow, followingUsers, followingSucces } = UsersSlice.actions
 export default UsersSlice.reducer

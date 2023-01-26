@@ -25,9 +25,15 @@ export const usersApi = {
    },
    followRequest(id: number) {
       return (instanse.post(`follow/${id}`))
+         .catch((error) => {
+            return error
+         })
    },
    unfollowRequest(id: number) {
       return (instanse.delete(`follow/${id}`))
+         .catch((error) => {
+            return error
+         })
    }
 }
 
