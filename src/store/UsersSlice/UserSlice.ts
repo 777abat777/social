@@ -1,30 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { usersApi } from "../../api/api"
+import { ResponseData, TypeFetchUsersArguments, TypeFollowToggleTunkArguments, UsersStateInterface } from './TypesSlice'
 
-// Define a type for the slice state
-interface UsersStateInterface {
-   users: Array<UserType>,
-   pageSize: number,
-   currentPage: number,
-   totalUserCount: number,
-   isLoadingUsers: boolean,
-   loading: boolean,
-   error: string | null | undefined,
-   followingInProgress: boolean,
-   followingUsers: Array<number>
-}
-
-export type UserType = {
-   followed: boolean,
-   id: number
-   name: string
-   photos: {}
-   loading: null | string
-   uniqueUrlName: null | string
-}
-
-// Define the initial state using that type
 const initialState: UsersStateInterface = {
    users: [],
    pageSize: 10,
@@ -33,21 +11,7 @@ const initialState: UsersStateInterface = {
    isLoadingUsers: true,
    loading: false,
    error: null,
-   followingInProgress: false,
    followingUsers: []
-}
-export type ResponseData = {
-   error: null,
-   items: Array<UserType>,
-   totalCount: number
-}
-export type TypeFetchUsersArguments = {
-   pageSize: number,
-   page: number
-}
-export type TypeFollowToggleTunkArguments = {
-   id: number,
-   followCase: "follow" | "unfollow"
 }
 
 export const fetchUsers = createAsyncThunk<ResponseData, TypeFetchUsersArguments, { rejectValue: string }>(
@@ -111,9 +75,6 @@ export const UsersSlice = createSlice({
             return user
          })
       },
-      setUsers: (state, action: PayloadAction<any>) => {
-         state.users = action.payload
-      },
       setUsersTotalCount: (state, action: PayloadAction<number>) => {
          state.totalUserCount = action.payload
       },
@@ -122,9 +83,6 @@ export const UsersSlice = createSlice({
       },
       resetPage: (state) => {
          state.currentPage = 1
-      },
-      loadingUsers: (state, action: PayloadAction<boolean>) => {
-         state.isLoadingUsers = action.payload
       },
       followingUsers: (state, action: PayloadAction<number>) => {
          state.followingUsers.push(action.payload)
@@ -160,5 +118,5 @@ export const UsersSlice = createSlice({
 }
 )
 
-export const { setUsers, setUsersTotalCount, changePage, resetPage, follow, unFollow, followingUsers, followingSucces } = UsersSlice.actions
+export const { setUsersTotalCount, changePage, resetPage, follow, unFollow, followingUsers, followingSucces } = UsersSlice.actions
 export default UsersSlice.reducer

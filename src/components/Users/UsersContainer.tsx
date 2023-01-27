@@ -14,7 +14,6 @@ const UsersContainer: React.FC = () => {
    let currentPage = useAppSelector(state => state.users.currentPage)
    let loading = useAppSelector((state) => state.users.loading)
    let error = useAppSelector((state) => state.users.error)
-   let followingInProgress = useAppSelector((state) => state.users.followingInProgress)
    let followingUsers = useAppSelector((state) => state.users.followingUsers)
 
 
@@ -51,7 +50,6 @@ const UsersContainer: React.FC = () => {
             changeCurrentPage={changeCurrentPage}
             followUser={followUser}
             unFollowUser={unFollowUser}
-            followingInProgress={followingInProgress}
             followingUsers={followingUsers}
          />
       </div>
